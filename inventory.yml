@@ -1,0 +1,9 @@
+all:
+  hosts:
+    pihole:
+      ansible_host: 192.168.50.110
+      ansible_ssh_private_key_file: ~/.ssh/pi-hole
+      # Other host-specific variables can be added here
+
+  vars: 
+    ansible_user: elian

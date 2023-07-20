@@ -1,0 +1,11 @@
+---
+- name: Update APT Cache
+  hosts: all
+  become: yes  # Enable privilege escalation to become root
+
+  vars_files:
+    - vault
+  tasks:
+    - name: Update APT Cache
+      apt:
+        update_cache: yes

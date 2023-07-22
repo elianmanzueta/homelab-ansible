@@ -22,6 +22,8 @@
            - curl
            - git
            - fail2ban
+           - cmatrix
+           - htop
 
      - name: Enable fail2ban
        shell: |

@@ -35,3 +35,4 @@ terraform.rc
 
 # Ignore Ansible vault
 vault
+.vault_pass

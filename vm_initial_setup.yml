@@ -1,0 +1,38 @@
+---
+- name: VM Initial Setup
+  hosts: all
+  become: yes 
+
+  vars_files:
+    - vault
+    
+  tasks:
+
+     - name: Update APT Cache
+       apt:
+         update_cache: yes
+
+     - name: Update packages
+       shell: sudo apt-get upgrade -y
+
+     - name: Install packages -  micro, curl, git
+       apt:
+         name:
+           - micro
+           - curl
+           - git
+           - fail2ban
+
+     - name: Enable fail2ban
+       shell: |
+         systemctl start fail2ban
+         systemctl enable fail2ban
+
+     - name: Set micro as default editor
+       shell: EDITOR='micro'
+
+     - name: Configure ls options
+       shell: alias ls='ls -lha --color=auto'
+
+     - name: Disable SSH Forwarding
+       shell: echo "DisableForwarding yes" >> /etc/ssh/sshd_config.d/10-my-sshd-settings.conf

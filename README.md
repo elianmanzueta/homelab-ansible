@@ -1,3 +1,3 @@
 # linuxstuff
 
-A repository dedicated for my homelab. Dedicated to holding configuration files.
+A repository for my homelab. This will mainly be used for holding Ansible playbooks and configuration files. 

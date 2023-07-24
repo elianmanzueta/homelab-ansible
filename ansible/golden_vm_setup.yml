@@ -59,7 +59,6 @@
        shell: |
          sudo ufw enable
          ufw allow ssh
-
          
        # Remove machine ID and SSH Host keys + clean APT
      - name: Clean image to prepare for template

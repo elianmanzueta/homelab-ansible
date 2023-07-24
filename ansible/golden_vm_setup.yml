@@ -1,0 +1,70 @@
+---
+- name: VM Initial Setup
+  hosts: all
+  become: yes 
+  pre_tasks:
+  - name: Install updates
+    apt:
+      update_cache: yes
+      upgrade: dist
+
+  vars_files:
+    - vault
+    
+  tasks:
+
+     - name: Install packages
+       package:
+         name:
+           - micro
+           - curl
+           - git
+           - fail2ban
+           - cmatrix
+           - htop
+           - unzip
+           - snmp
+           - snmpd
+           - snmp-mibs-downloader
+         state: present
+
+     - name: Add MIBs
+       shell: sudo sed -i 's/mibs :/# mibs :/g' /etc/snmp/snmp.conf
+       
+     - name: Enable fail2ban
+       shell: |
+         systemctl start fail2ban
+         systemctl enable fail2ban
+
+     - name: Configure bashrc
+       get_url:
+         url: https://raw.githubusercontent.com/elianmanzueta//elian-lab/main/files/.bashrc_configuration
+         dest: /home/elian/.bashrc
+         owner: root
+         group: root
+         mode: 0644
+
+     - name: Configure snmpd
+       get_url:
+         url: https://raw.githubusercontent.com/elianmanzueta//elian-lab/main/files/snmpd_configuration
+         dest: /etc/snmpd.conf
+         owner: root
+         group: root
+         mode: 0600
+
+     - name: Disable SSH Forwarding
+       shell: echo "DisableForwarding yes" >> /etc/ssh/sshd_config.d/10-my-sshd-settings.conf
+
+     - name: Enable firewall and permit SSH
+       shell: |
+         sudo ufw enable
+         ufw allow ssh
+
+         
+       # Remove machine ID and SSH Host keys + clean APT
+     - name: Clean image to prepare for template
+       shell: |
+         sudo rm /etc/ssh/ssh_host_*
+         sudo truncate -s 0 /etc/machine-id
+         sudo apt clean
+         sudo apt autoremove

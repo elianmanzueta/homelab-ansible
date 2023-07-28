@@ -19,6 +19,7 @@
            - micro
            - curl
            - git
+           - gh
            - fail2ban
            - cmatrix
            - htop

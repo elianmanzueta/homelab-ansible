@@ -24,6 +24,8 @@
            - cmatrix
            - htop
            - unzip
+           - nmon
+           - sysstat
            - snmp
            - snmpd
            - snmp-mibs-downloader

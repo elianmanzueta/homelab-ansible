@@ -53,12 +53,14 @@
      
      - name: Configure vim
        get_url:
-         url:
-         dest:
-         owner:
-         group:
-         mode: 
-
+         url: https://raw.githubusercontent.com/elianmanzueta/elian-lab/main/files/.vimrc_configuration
+         dest: /home/elian/.vimrc
+         owner: root
+         group: root
+         mode: 0644
+     
+     - name: Configure .vim directory tree
+       shell: mkdir -p ~/.vim ~/.vim/autoload ~/.vim/backup ~/.vim/colors ~/.vim/plugged
 
      - name: Disable SSH Forwarding
        shell: echo "DisableForwarding yes" >> /etc/ssh/sshd_config.d/10-my-sshd-settings.conf

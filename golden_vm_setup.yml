@@ -50,6 +50,15 @@
          owner: root
          group: root
          mode: 0600
+     
+     - name: Configure vim
+       get_url:
+         url:
+         dest:
+         owner:
+         group:
+         mode: 
+
 
      - name: Disable SSH Forwarding
        shell: echo "DisableForwarding yes" >> /etc/ssh/sshd_config.d/10-my-sshd-settings.conf

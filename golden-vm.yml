@@ -1,4 +1,4 @@
---
+---
 - name: VM Initial Setup
   hosts: all
   become: yes 
@@ -52,7 +52,7 @@
          group: root
          mode: 0600
      
-     - name: Configure vimcrc
+     - name: Configure .vimcrc
        get_url:
          url: https://raw.githubusercontent.com/elianmanzueta/elian-lab/main/files/.vimrc_configuration
          dest: /home/elian/.vimrc
@@ -76,7 +76,7 @@
          ufw allow ssh
          ufw --force enable
               
-     - name: Cleaning up 
+     - name: Cleanup 
        shell: |
          sudo apt clean
          sudo apt autoremove

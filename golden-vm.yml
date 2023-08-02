@@ -9,9 +9,6 @@
       update_cache: yes
       upgrade: dist
 
-  vars_files:
-    - vault
-    
   tasks:
 
      - name: Install packages
@@ -39,16 +36,11 @@
      - name: Configure aliases 
        get_url:
          url: https://raw.githubusercontent.com/elianmanzueta/linuxstuff/main/files/.bash_aliases
-         dest: /home/elian/.bashrc
+         dest: /home/elian/.bash_aliases
          owner: root
          group: root
          mode: 0644
      
-     - name: Make neovim the default editor
-       shell: |
-         export EDITOR=nvim >> ~/.bashrc
-         source ~/.bashrc
-
      - name: Configure snmpd.conf
        get_url:
          url: https://raw.githubusercontent.com/elianmanzueta/linuxstuff/main/files/snmpd-configuration
@@ -58,12 +50,12 @@
          mode: 0600
      
      - name: Configure the nvim directory
-       shell: mkdir ~/.config/nvim 
-     
+       shell: mkdir /home/elian/.config/nvim 
+       ignore_errors: yes 
      - name: Configure init.vim
        get_url:
          url: https://raw.githubusercontent.com/elianmanzueta/linuxstuff/main/files/init.vim
-         dest: ~/.config/nvim/
+         dest: /home/elian/.config/nvim/
          owner: root
          group: root
          mode: 0644

@@ -38,7 +38,7 @@
 
      - name: Configure .bashrc
        get_url:
-         url: https://raw.githubusercontent.com/elianmanzueta/linuxstuff/main/files/.bashrc_configuration
+         url: https://raw.githubusercontent.com/elianmanzueta/linuxstuff/main/files/.bashrc-configuration
          dest: /home/elian/.bashrc
          owner: root
          group: root
@@ -46,7 +46,7 @@
 
      - name: Configure snmpd.conf
        get_url:
-         url: https://raw.githubusercontent.com/elianmanzueta/linuxstuff/main/files/snmpd_configuration
+         url: https://raw.githubusercontent.com/elianmanzueta/linuxstuff/main/files/snmpd-configuration
          dest: /etc/snmpd.conf
          owner: root
          group: root
@@ -54,7 +54,7 @@
      
      - name: Configure .vimcrc
        get_url:
-         url: https://raw.githubusercontent.com/elianmanzueta/elian-lab/main/files/.vimrc_configuration
+         url: https://raw.githubusercontent.com/elianmanzueta/elian-lab/main/files/.vimrc-configuration
          dest: /home/elian/.vimrc
          owner: root
          group: root

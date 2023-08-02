@@ -20,7 +20,7 @@
            - micro
            - curl
            - git
-           - vim
+           - neovim
            - gh
            - fail2ban
            - cmatrix
@@ -36,13 +36,18 @@
      - name: Add MIBs
        shell: sudo sed -i 's/mibs :/# mibs :/g' /etc/snmp/snmp.conf
 
-     - name: Configure .bashrc
+     - name: Configure aliases 
        get_url:
-         url: https://raw.githubusercontent.com/elianmanzueta/linuxstuff/main/files/.bashrc-configuration
+         url: https://raw.githubusercontent.com/elianmanzueta/linuxstuff/main/files/.bash_aliases
          dest: /home/elian/.bashrc
          owner: root
          group: root
          mode: 0644
+     
+     - name: Make neovim the default editor
+       shell: |
+         export EDITOR=nvim >> ~/.bashrc
+         source ~/.bashrc
 
      - name: Configure snmpd.conf
        get_url:
@@ -52,16 +57,16 @@
          group: root
          mode: 0600
      
-     - name: Configure .vimcrc
+     - name: Configure the nvim directory
+       shell: mkdir ~/.config/nvim 
+     
+     - name: Configure init.vim
        get_url:
-         url: https://raw.githubusercontent.com/elianmanzueta/elian-lab/main/files/.vimrc-configuration
-         dest: /home/elian/.vimrc
+         url: https://raw.githubusercontent.com/elianmanzueta/linuxstuff/main/files/init.vim
+         dest: ~/.config/nvim/
          owner: root
          group: root
          mode: 0644
-     
-     - name: Configure .vim directory tree
-       shell: mkdir -p ~/.vim ~/.vim/autoload ~/.vim/backup ~/.vim/colors ~/.vim/plugged
 
      - name: Disable SSH Forwarding
        shell: echo "DisableForwarding yes" >> /etc/ssh/sshd_config.d/10-my-sshd-settings.conf

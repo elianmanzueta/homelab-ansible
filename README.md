@@ -1,3 +1,3 @@
-# Elian's Homelab Repository
+# Ansible Repository
 
-A repository for my homelab. This will mainly be used for holding Ansible playbooks and configuration files. 
+A repository for Ansible playbooks used in my homelab.

@@ -22,22 +22,19 @@
       - sysstat
       - libfuse2
       - ninja-build
+      - build-essentials
+      - git
       - gettext
       - cmake
 
 - name: Add MIBs
   shell: sudo sed -i 's/mibs :/# mibs :/g' /etc/snmp/snmp.conf
 
- - name: Install nvim
-   shell: |
+- name: Install nvim
+  shell: |
     git clone https://github.com/neovim/neovim
     cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo make install 
-
-- name: Install Vim Plug
-  shell: |
-    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 - name: Configure nvim directory
   copy:
@@ -48,7 +45,7 @@
 - name: Add nvim configuration
   git:
     repo: https://github.com/elianmanzueta/nvim
-    dest: /home/elian/.config/
+    dest: /home/elian/.config/nvim/
 
 - name: Configure snmpd.conf 
   copy:
@@ -56,7 +53,7 @@
     dest: /etc/snmp/snmpd.conf
     owner: root
     group: root
-    mode: '0700'
+    mode: '0644'
 
 - name: Configure ~/.bashrc
   copy:
@@ -66,7 +63,7 @@
     group: root
     mode: '0644'
 
- name: Start/enable fail2ban service 
+- name: Start/enable fail2ban service 
   service:
     name: fail2ban
     state: started

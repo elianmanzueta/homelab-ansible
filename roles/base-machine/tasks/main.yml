@@ -5,6 +5,7 @@
     name:
       - curl
       - wget
+      - python3-pip
       - snmp
       - snmpd
       - snmp-mibs-downloader
@@ -17,7 +18,7 @@
       - sysstat
       - libfuse2
       - ninja-build
-      - build-essentials
+      - build-essential
       - git
       - gettext
       - cmake
@@ -34,18 +35,7 @@
     git clone https://github.com/neovim/neovim
     cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo make install 
-
-- name: Configure nvim directory
-  copy:
-    path: /home/elian/.config/nvim
-    state: directory
-    mode: '0644'
-    
-- name: Add nvim configuration
-  git:
-    repo: https://github.com/elianmanzueta/nvim
-    dest: /home/elian/.config/nvim/
-
+   
 - name: Configure snmpd.conf 
   copy:
     src: files/snmpd.conf 

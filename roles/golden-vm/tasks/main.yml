@@ -1,0 +1,61 @@
+---
+- name: Update and upgrade apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    upgrade: yes
+
+- name: Install base packages
+  apt:
+    name:
+      - curl
+      - wget
+      - snmp
+      - snmpd
+      - snmp-mibs-downloader
+      - gh
+      - fail2ban
+      - cmatrix
+      - htop
+      - unzip
+      - nmon
+      - sysstat
+      - libfuse2
+      - ninja-build
+      - build-essentials
+      - gettext
+      - cmake
+
+- name: Add MIBs
+  shell: sudo sed -i 's/mibs :/# mibs :/g' /etc/snmp/snmp.conf
+
+- name: Configure snmpd.conf 
+  template: 
+    src: files/snmpd.conf 
+    dest: /etc/snmp/snmpd.conf
+
+- name: Configure ~/.bashrc
+  template:
+    src: files/.bashrc
+    dest: /home/elian/.bashrc
+
+- name: Install nvim
+  shell: |
+    git clone https://github.com/neovim/neovim
+    cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make install 
+
+- name: Configure nvim
+  shell: |
+    mkdir ~/.config/nvim/ 
+    git clone https://github.com/LazyVim/starter ~/.config/nvim
+
+- name: Start/enable fail2ban service 
+  service:
+    name: fail2ban
+    state: started
+
+- name: Enable firewall and permit SSH access
+  shell: |
+    ufw allow ssh
+    ufw --force enable

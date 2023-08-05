@@ -1,0 +1,77 @@
+---
+- name: Update and upgrade apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    upgrade: yes
+
+- name: Install base packages
+  apt:
+    name:
+      - curl
+      - wget
+      - snmp
+      - snmpd
+      - snmp-mibs-downloader
+      - gh
+      - fail2ban
+      - cmatrix
+      - htop
+      - unzip
+      - nmon
+      - sysstat
+      - libfuse2
+      - ninja-build
+      - gettext
+      - cmake
+
+- name: Add MIBs
+  shell: sudo sed -i 's/mibs :/# mibs :/g' /etc/snmp/snmp.conf
+
+ - name: Install nvim
+   shell: |
+    git clone https://github.com/neovim/neovim
+    cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make install 
+
+- name: Install Vim Plug
+  shell: |
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+- name: Configure nvim directory
+  copy:
+    path: /home/elian/.config/nvim
+    state: directory
+    mode: '0644'
+    
+- name: Add nvim configuration
+  git:
+    repo: https://github.com/elianmanzueta/nvim
+    dest: /home/elian/.config/
+
+- name: Configure snmpd.conf 
+  copy:
+    src: files/snmpd.conf 
+    dest: /etc/snmp/snmpd.conf
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Configure ~/.bashrc
+  copy:
+    src: files/.bashrc
+    dest: /home/elian/.bashrc
+    owner: root
+    group: root
+    mode: '0644'
+
+ name: Start/enable fail2ban service 
+  service:
+    name: fail2ban
+    state: started
+
+- name: Enable firewall and permit SSH access
+  shell: |
+    ufw allow ssh
+    ufw --force enable

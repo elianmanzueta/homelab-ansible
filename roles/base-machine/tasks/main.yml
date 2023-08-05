@@ -57,6 +57,11 @@
     group: root
     mode: '0644'
 
+- name: Configure git
+  shell: |
+    git config --global user.email "eliandmanzueta@gmail.com"
+    git config --global user.name "Elian"
+
 - name: Start/enable fail2ban service 
   service:
     name: fail2ban

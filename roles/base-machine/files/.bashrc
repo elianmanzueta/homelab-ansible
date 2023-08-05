@@ -123,3 +123,5 @@ alias vi='nvim'
 alias vim='nvim'
 alias genssh='sudo dpkg-reconfigure openssh-server'
 alias nvimconfig='cd ~/.config/nvim'
+
+eval "$(starship init bash)"

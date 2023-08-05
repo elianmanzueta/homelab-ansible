@@ -28,14 +28,19 @@
     name: pynvim
 
 - name: Add MIBs
-  shell: sudo sed -i 's/mibs :/# mibs :/g' /etc/snmp/snmp.conf
+  command: sed -i 's/mibs :/# mibs :/g' /etc/snmp/snmp.conf
 
 - name: Install nvim
   shell: |
     git clone https://github.com/neovim/neovim
     cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-    sudo make install 
-   
+    make install 
+
+- name: Configure nvim
+  git:
+    repo: https://github.com/elianmanzueta/nvim.git
+    dest: ~/.config/nvim
+ 
 - name: Configure snmpd.conf 
   copy:
     src: files/snmpd.conf 

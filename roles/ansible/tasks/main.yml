@@ -10,12 +10,18 @@
 - name: Install ansible.community.general collection
   command: ansible-galaxy collection install community.general
 
+- name: Check for ansible repository
+  stat:
+    path: /home/elian/ansible/ 
+  register: ansible_dir_info
+
 - name: Clone ansible repository
   git:
-   repo: https://github.com/elianmanzueta/homelab-ansible
-   dest: /home/elian/ansible/
+    repo: https://github.com/elianmanzueta/homelab-ansible
+    dest: /home/elian/ansible/
+  when: not ansible_dir_info.stat.exists
 
 - name: Configure repository alias
   shell: |
     echo >> /home/elian/.bashrc
-    echo "alias repo='cd /home/elian/ansible" >> /home/elian/.bashrc
+    echo "alias adir='cd /home/elian/ansible" >> /home/elian/.bashrc

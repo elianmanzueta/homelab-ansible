@@ -123,9 +123,9 @@ alias vi='nvim'
 alias vim='nvim'
 alias genkeys='sudo dpkg-reconfigure openssh-server'
 alias nvimconfig='cd ~/.config/nvim'
-alias gpsh='git push'
-alias gpll-'git pull'
-alias lazycommit='git commit -m '.''
+alias lazycommit="git commit -m 'lazycommit'"
+alias gpll='git pull'
+lias gpush='git push'
 
 # Starship
 eval "$(starship init bash)"

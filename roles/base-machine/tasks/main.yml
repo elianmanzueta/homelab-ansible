@@ -26,9 +26,6 @@
   pip:
     name: pynvim
 
-- name: Add MIBs
-  command: sed -i 's/mibs :/# mibs :/g' /etc/snmp/snmp.conf
-
 - name: Install nvim
   shell: |
     git clone https://github.com/neovim/neovim

@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  become: true
+  roles:
+    - base-machine
+
+- hosts: ansible
+  become: true
+  roles:
+    - ansible

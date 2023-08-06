@@ -1,15 +1,10 @@
 ---
-- name: Update and upgrade apt
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600
-    upgrade: yes
-
 - name: Install base packages
   apt:
     name:
       - curl
       - wget
+      - python3-pip
       - snmp
       - snmpd
       - snmp-mibs-downloader
@@ -22,18 +17,25 @@
       - sysstat
       - libfuse2
       - ninja-build
+      - build-essential
+      - git
       - gettext
       - cmake
 
-- name: Add MIBs
-  shell: sudo sed -i 's/mibs :/# mibs :/g' /etc/snmp/snmp.conf
+- name: (pip) Install pynvim
+  pip:
+    name: pynvim
 
- - name: Install nvim
-   shell: |
+- name: Add MIBs
+  command: sed -i 's/mibs :/# mibs :/g' /etc/snmp/snmp.conf
+
+- name: Install nvim
+  shell: |
     git clone https://github.com/neovim/neovim
     cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-    sudo make install 
+    make install 
 
+<<<<<<< HEAD
 - name: Configure nvim directory
   copy:
     path: /home/elian/.config/nvim
@@ -41,17 +43,20 @@
     mode: '0644'
 
 - name: Add nvim configuration
+=======
+- name: Configure nvim
+>>>>>>> 0e001fbbc22b4cb63ce92fad0e480d9a52054f01
   git:
-    repo: https://github.com/elianmanzueta/nvim
-    dest: /home/elian/.config/
-
+    repo: https://github.com/elianmanzueta/nvim.git
+    dest: ~/.config/nvim
+ 
 - name: Configure snmpd.conf 
   copy:
     src: files/snmpd.conf 
     dest: /etc/snmp/snmpd.conf
     owner: root
     group: root
-    mode: '0700'
+    mode: '0644'
 
 - name: Configure ~/.bashrc
   copy:
@@ -61,7 +66,20 @@
     group: root
     mode: '0644'
 
- name: Start/enable fail2ban service 
+- name: Configure starship
+  copy:
+    sec: files/starship.toml
+    dest: /home/elian/.config/starship.toml 
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Configure git
+  shell: |
+    git config --global user.email "eliandmanzueta@gmail.com"
+    git config --global user.name "Elian"
+
+- name: Start/enable fail2ban service 
   service:
     name: fail2ban
     state: started

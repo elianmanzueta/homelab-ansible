@@ -1,0 +1,16 @@
+---
+- name: Install sshpass
+  apt:
+    name: sshpass
+
+- name: Install ansible
+  apt:
+    name: ansible
+
+- name: Install ansible.community.general collection
+  command: sudo ansible-galaxy collection install community.general
+
+- name: Clone ansible repository
+  git:
+   repo: https://github.com/elianmanzueta/homelab-ansible
+   dest: /home/elian/ansible/

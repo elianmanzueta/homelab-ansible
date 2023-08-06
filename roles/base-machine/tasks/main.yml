@@ -42,7 +42,7 @@
  
 - name: Configure snmpd.conf 
   template:
-    src: templates/snmp_config.j2
+    src: templates/snmpd_config.j2
     dest: /etc/snmp/snmpd.conf
 
 - name: Configure ~/.bashrc
@@ -55,7 +55,7 @@
 
 - name: Configure starship
   copy:
-    sec: files/starship.toml
+    src: files/starship.toml
     dest: /home/elian/.config/starship.toml 
     owner: root
     group: root

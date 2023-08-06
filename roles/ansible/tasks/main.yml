@@ -14,3 +14,8 @@
   git:
    repo: https://github.com/elianmanzueta/homelab-ansible
    dest: /home/elian/ansible/
+
+- name: Configure repository alias
+  shell: |
+    echo >> /home/elian/.bashrc
+    echo "alias repo='cd /home/elian/ansible" >> /home/elian/.bashrc

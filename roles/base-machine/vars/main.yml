@@ -1,0 +1,5 @@
+snmp_community: public
+snmp_location: Elian's House
+snmp_contact: Elian
+# other SNMP variables...
+

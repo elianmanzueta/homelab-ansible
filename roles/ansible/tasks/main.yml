@@ -8,7 +8,7 @@
     name: ansible
 
 - name: Install ansible.community.general collection
-  command: sudo ansible-galaxy collection install community.general
+  command: ansible-galaxy collection install community.general
 
 - name: Clone ansible repository
   git:

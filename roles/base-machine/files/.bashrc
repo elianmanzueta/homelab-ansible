@@ -117,7 +117,6 @@ fi
 ## Additions
 
 # Aliases
-
 alias sl='ls -lhaF --color=auto'
 alias ls='ls -lhaF --color=auto'
 alias vi='nvim'
@@ -127,4 +126,6 @@ alias nvimconfig='cd ~/.config/nvim'
 alias gpsh='git push'
 alias gpll-'git pull'
 alias lazycommit='git commit -m '.''
+
+# Starship
 eval "$(starship init bash)"

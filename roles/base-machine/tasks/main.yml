@@ -41,12 +41,9 @@
     dest: /home/elian/.config/nvim
  
 - name: Configure snmpd.conf 
-  copy:
-    src: files/snmpd.conf 
+  template:
+    src: templates/snmp_config.j2
     dest: /etc/snmp/snmpd.conf
-    owner: root
-    group: root
-    mode: '0644'
 
 - name: Configure ~/.bashrc
   copy:

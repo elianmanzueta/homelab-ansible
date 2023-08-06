@@ -1,0 +1,9 @@
+# SNMP Configuration
+com2sec myUser  default     {{ snmp_community }}
+group   myGroup v2c        myUser
+view    all    included   .1
+access  myGroup ""      any       noauth    exact  all    none   none
+syslocation {{ snmp_location }}
+syscontact {{ snmp_contact }}
+# other SNMP configuration options...
+

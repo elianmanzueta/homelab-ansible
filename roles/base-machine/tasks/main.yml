@@ -35,16 +35,10 @@
     cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
     make install 
 
-- name: Configure nvim directory
-  copy:
-    path: /home/elian/.config/nvim
-    state: directory
-    mode: '0644'
-
 - name: Configure nvim
   git:
     repo: https://github.com/elianmanzueta/nvim.git
-    dest: ~/.config/nvim
+    dest: /home/elian/.config/nvim
  
 - name: Configure snmpd.conf 
   copy:

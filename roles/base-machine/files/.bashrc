@@ -118,6 +118,7 @@ fi
 
 # Aliases
 
+alias sl='ls -lhaF --color=auto'
 alias ls='ls -lhaF --color=auto'
 alias vi='nvim'
 alias vim='nvim'

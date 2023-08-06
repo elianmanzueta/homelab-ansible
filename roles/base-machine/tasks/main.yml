@@ -1,5 +1,4 @@
 ---
-
 - name: Install base packages
   apt:
     name:
@@ -23,7 +22,7 @@
       - gettext
       - cmake
 
-- name: Install pynvim
+- name: (pip) Install pynvim
   pip:
     name: pynvim
 
@@ -53,6 +52,14 @@
   copy:
     src: files/.bashrc
     dest: /home/elian/.bashrc
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Configure starship
+  copy:
+    sec: files/starship.toml
+    dest: /home/elian/.config/starship.toml 
     owner: root
     group: root
     mode: '0644'

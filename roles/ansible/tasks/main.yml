@@ -21,7 +21,3 @@
     dest: /home/elian/ansible/
   when: not ansible_dir_info.stat.exists
 
-- name: Configure repository alias
-  shell: |
-    echo >> /home/elian/.bashrc
-    echo "alias adir='cd /home/elian/ansible" >> /home/elian/.bashrc

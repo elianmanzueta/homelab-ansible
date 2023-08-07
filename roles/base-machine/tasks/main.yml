@@ -21,10 +21,16 @@
       - git
       - gettext
       - cmake
+      - procps
+      - file
 
 - name: (pip) Install pynvim
   pip:
     name: pynvim
+
+- name: Install homebrew
+  command: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  become_method: sudo 
 
 - name: Install nvim
   shell: |

@@ -1,6 +1,8 @@
 #                                 
 
 format = """
+[](fg:#0969da bg:#0969da)\
+$hostname\
 [](fg:#0969da bg:#0969da)\
 $username\
 [](fg:#0969da bg:#eac54f)\
@@ -17,6 +19,12 @@ $time\
 $all
 $character
 """
+
+[hostname]
+style  = "fg:#ffffff bg:#0969da"
+ssh_only = false
+ssh_symbol = ''
+format = '[$hostname @]($style)'
 
 [username]
 show_always = true

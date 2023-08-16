@@ -22,7 +22,6 @@
       - gettext
       - cmake
       - procps
-      - file
 
 - name: (pip) Install pynvim
   pip:
@@ -48,14 +47,6 @@
   copy:
     src: files/.bashrc
     dest: /home/elian/.bashrc
-    owner: root
-    group: root
-    mode: '0644'
-
-- name: Configure starship
-  copy:
-    src: files/starship.toml
-    dest: /home/elian/.config/starship.toml 
     owner: root
     group: root
     mode: '0644'

@@ -114,7 +114,7 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-## Additions
+## Alias Additions
 
 alias sl='ls -lhaF --color=auto'
 alias ls='ls -lhaF --color=auto'
@@ -125,6 +125,3 @@ alias nvimconfig='cd ~/.config/nvim'
 alias lazycommit="git commit -m 'lazycommit'"
 alias gpull='git pull'
 alias gpush='git push'
-
-# Starship
-eval "$(starship init bash)"

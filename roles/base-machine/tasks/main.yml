@@ -23,22 +23,21 @@
       - cmake
       - procps
       - file
+      - zsh
 
 - name: (pip) Install pynvim
   pip:
     name: pynvim
 
-- name: Install homebrew
-  command: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  become_method: sudo 
+- name: Clone configuration repository
+  git: 
+    repo: https://github.com/elianmanzueta/config 
+    dest: /home/elian/config  
 
-- name: Install nvim
-  shell: |
-    git clone https://github.com/neovim/neovim
-    cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-    make install 
+- name: Run configuration install script
+  shell: sh ~/config/scripts/install.sh 
 
-- name: Configure nvim
+- name: Configure neovim
   git:
     repo: https://github.com/elianmanzueta/nvim.git
     dest: /home/elian/.config/nvim
@@ -47,22 +46,6 @@
   template:
     src: templates/snmpd_config.j2
     dest: /etc/snmp/snmpd.conf
-
-- name: Configure ~/.bashrc
-  copy:
-    src: files/.bashrc
-    dest: /home/elian/.bashrc
-    owner: root
-    group: root
-    mode: '0644'
-
-- name: Configure starship
-  copy:
-    src: files/starship.toml
-    dest: /home/elian/.config/starship.toml 
-    owner: root
-    group: root
-    mode: '0644'
 
 - name: Configure git
   shell: |

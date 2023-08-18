@@ -22,13 +22,17 @@
       - gettext
       - cmake
       - procps
+<<<<<<< HEAD
       - file
       - zsh
+=======
+>>>>>>> d21b2b9508660b985a50a1b14c9acdda23182248
 
 - name: (pip) Install pynvim
   pip:
     name: pynvim
 
+<<<<<<< HEAD
 - name: Clone configuration repository
   git: 
     repo: https://github.com/elianmanzueta/config 
@@ -36,6 +40,13 @@
 
 - name: Run configuration install script
   shell: sh ~/config/scripts/install.sh 
+=======
+- name: Install nvim
+  shell: |
+    git clone https://github.com/neovim/neovim
+    cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
+    make install 
+>>>>>>> d21b2b9508660b985a50a1b14c9acdda23182248
 
 - name: Configure neovim
   git:
@@ -47,6 +58,17 @@
     src: templates/snmpd_config.j2
     dest: /etc/snmp/snmpd.conf
 
+<<<<<<< HEAD
+=======
+- name: Configure ~/.bashrc
+  copy:
+    src: files/.bashrc
+    dest: /home/elian/.bashrc
+    owner: root
+    group: root
+    mode: '0644'
+
+>>>>>>> d21b2b9508660b985a50a1b14c9acdda23182248
 - name: Configure git
   shell: |
     git config --global user.email "eliandmanzueta@gmail.com"
